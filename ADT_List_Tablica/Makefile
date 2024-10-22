@@ -1,0 +1,30 @@
+CC=g++
+CFLAGS=-Wall -std=c++11 -pedantic
+
+NAME1=main
+
+EXEC1  = $(NAME1).x   
+OBJS1  = $(NAME1).o   
+
+DIR := $(notdir $(CURDIR))
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $<
+
+all: $(EXEC1)
+
+$(EXEC1): $(OBJS1)
+	$(CC) -o $@ $(CFLAGS) $^
+
+clean:
+	rm -f $(EXEC1) $(OBJS1)
+
+tar: clean
+	(cd ../; tar -cvzf $(DIR).tar.gz $(DIR))
+
+# Uruchomienie programu
+run: $(EXEC1)
+	./$(EXEC1)
+
+
+.PHONY: clean tar run
