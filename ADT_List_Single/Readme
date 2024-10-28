@@ -1,0 +1,22 @@
+Przygotować implementację realizującą ADT LIST na bazie listy powiązanej pojedynczo.Będzie to klasa SingleList umieszczona w pliku singlelist.h. Uzupełnić plik singlelist.h, stworzyć funkcję main() i testy sprawdzające działanie interfejsu list.
+
+Listy powiązane składają się z szeregu elementów(węzłów) powiązanych ze sobą łączami.Węzły list powiązanych pojedynczo przechowują pewną wartość oraz zawierają łącze do następnego węzła na liście. Jedynym sposobem dostania się do konkretnego węzła jest przejście przez listę od jej samego początku. Ostatni węzeł oznacza się zgodnie z jedną przedstawionych poniżej konwencji :
+
+-   za pomocą pustego łącza, które nie wskazuje żadnego węzła,
+-   za pomocą węzła - atrapy,
+-   za pomocą łącza wskazującego pierwszy element listy(lista cykliczna).
+
+Listy powiązane są wykorzystywane do implementacji ADT LIST, dlatego przypomnimy typowe operacje dla tego ADT.
+
+-   konstruktor tworzący pustą listę,
+-   testowanie, czy lista nie jest pusta[empty()],
+-   odczyt liczby elementów na liście[size()],
+-   dołączanie elementu na początek listy[push_front(item)],
+-   dołączanie elementu na koniec listy[push_back(item)],
+-   dostęp do pierwszego(lewego skrajnego) elementu[front()],
+-   dostęp do ostatniego(prawego skrajnego) elementu[back()],
+-   usunięcie elementu pierwszego[pop_front()],
+-   usunięcie elementu ostatniego[pop_back()],
+-   czyszczenie listy[clear()],
+
+Lista pojedynczo powiązana występuje w STL jako std::forward_list.
