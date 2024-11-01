@@ -1,0 +1,8 @@
+Listy powiązane podwójnie mają elementy powiązane dwoma łączami :
+do elementu następnego(next) i do elementu poprzedniego(prev).
+
+W łatwy sposób możemy poruszać się po liście do przodu i wstecz.
+Ponadto przy usuwaniu węzła musimy znać tylko łącze do niego samego, podczas gdy przy listach połączonych pojedynczo potrzebne było też łącze do węzła poprzedzającego.
+
+Lista powiązana podwójnie może być wykorzystana do implementacji std::list z biblioteki STL. Przygotować implementację realizującą ADT LIST na bazie listy powiązanej podwójnie. Będzie to klasa DoubleList umieszczona w pliku doublelist.h.Uzupełnić plik doublelist.h,
+stworzyć funkcję main() i testy sprawdzające działanie interfejsu list.
