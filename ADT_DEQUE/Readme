@@ -1,0 +1,20 @@
+Przygotować implementację realizującą ADT DEQUE na bazie tablicy o stałym rozmiarze(tablica cykliczna), ustalanym w czasie tworzenia listy.Rozmiar tablicy jest o jeden większy niż maksymalna planowana liczba elementów w kolejce, po to aby rozróżnić sytuacje pustej i pełnej kolejki.
+
+ADT DEQUE(double - ended queue, kolejka dwustronna) reprezentuje kontener,
+który pozwala na szybkie O(1) dodawanie i usuwanie elementów z obu końców.W STL mamy kolejkę std::deque, która pozwala dodatkowo na swobodny dostęp do wszystkich elementów w stałym czasie O(1). Typowe operacje dla ADT DEQUE są następujące :
+
+-   konstruktor tworzący pustą listę,
+-   testowanie, czy lista nie jest pusta[empty()],
+-   odczyt liczby elementów na liście[size()],
+-   dołączanie elementu na początek listy[push_front(item)],
+-   dołączanie elementu na koniec listy[push_back(item)],
+-   dostęp do głowy(head), czyli pierwszego(lewego skrajnego) elementu[front()],
+-   dostęp do ogona(tail), czyli ostatniego(prawego skrajnego) elementu[back()],
+-   usunięcie elementu pierwszego[pop_front()],
+-   usunięcie elementu ostatniego[pop_back()],
+-   czyszczenie listy[clear()],
+-   dostęp do elementu o danym indeksie i,
+-   dołączanie elementu przed element na pozycji i[insert()],
+-   usunięcie elementu o danym indeksie i[erase()].
+
+ADT DEQUE może być zaimplementowany jako lista powiązana podwójnie, tablica cykliczna lub zestaw tablic o stałym rozmiarze z dodatkowymi mechanizmami(STL).
