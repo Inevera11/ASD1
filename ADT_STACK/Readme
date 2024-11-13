@@ -1,0 +1,2 @@
+ZADANIE 7.3
+Przygotować implementację realizującą ADT STACK na bazie listy powiązanej pojedynczo.Wykorzystać klasę SingleList lub std::forward_list. Operacje push() i pop() działające w stałym czasie można uzyskać przy użyciu push_front() i pop_front().
