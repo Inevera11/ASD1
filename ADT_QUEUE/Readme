@@ -1,0 +1,14 @@
+Kolejka to ADT, który pozwala zapisywać dane i następnie pobierać je w takiej kolejności, w jakiej je zapisano
+(ang.first in, first out, FIFO; pierwszy wchodzi, pierwszy wychodzi).
+Typowe operacje dla ADT QUEUE są następujące :
+
+-   konstruktor tworzący pustą kolejkę,
+-   testowanie, czy kolejka nie jest pusta[empty()],
+-   odczyt liczby elementów w kolejce[size()],
+-   wstawienie elementu na koniec kolejki[push(item) lub put(item)],
+-   usuwanie pierwszego elementu z kolejki[pop() lub get()],
+-   dostęp do pierwszego elementu kolejki[front()],
+-   dostęp do ostatniego elementu kolejki[back()],
+-   czyszczenie kolejki[clear()].
+
+Przygotować implementację realizującą ADT QUEUE na bazie dwóch stosów.
