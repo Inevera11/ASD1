@@ -19,12 +19,12 @@ public:
     { // copy constructor
         stack_put = other.stack_put;
         stack_pop = other.stack_pop;
-    };
+    }
     MyQueue(MyQueue &&other)
     { // move constructor
         stack_put = std::move(other.stack_put);
         stack_pop = std::move(other.stack_pop);
-    };
+    }
     MyQueue &operator=(const MyQueue &other)
     { // copy assignment operator, return *this
         if (this != &other)
@@ -33,7 +33,7 @@ public:
             stack_pop = other.stack_pop;
         }
         return *this;
-    };
+    }
     MyQueue &operator=(MyQueue &&other)
     { // move assignment operator, return *this
         if (this != &other)
@@ -42,12 +42,12 @@ public:
             stack_pop = std::move(other.stack_pop);
         }
         return *this;
-    };
-    bool empty() const { return stack_pop.empty() && stack_put.empty(); };    // checks if the container has no elements
-    std::size_t size() const { return stack_pop.size() + stack_put.size(); }; // liczba elementów w kolejce
-    void push(const T &item) { stack_put.push(item); };                       // dodanie na koniec, push_back(item)
-    void push(T &&item) { stack_put.push(std::move(item)); };                 // dodanie na koniec, push_back(std::move(item))
-    T &front()                                                                // zwraca początek, nie usuwa
+    }
+    bool empty() const { return stack_pop.empty() && stack_put.empty(); }    // checks if the container has no elements
+    std::size_t size() const { return stack_pop.size() + stack_put.size(); } // liczba elementów w kolejce
+    void push(const T &item) { stack_put.push(item); }                       // dodanie na koniec, push_back(item)
+    void push(T &&item) { stack_put.push(std::move(item)); }                 // dodanie na koniec, push_back(std::move(item))
+    T &front()                                                               // zwraca początek, nie usuwa
     {
         if (empty())
         {
@@ -63,7 +63,7 @@ public:
             }
         }
         return stack_pop.top();
-    };
+    }
     T &back() // zwraca koniec, nie usuwa
     {
         if (empty())
@@ -82,7 +82,7 @@ public:
             return *last_item;
         }
         return stack_put.top();
-    };
+    }
     void pop() // usuwa początek kolejki, pop_front()
     {
         if (empty())
@@ -98,7 +98,7 @@ public:
             }
         }
         return stack_pop.pop();
-    };
+    }
     void clear()
     {
         // czyszczenie listy z elementów
@@ -110,7 +110,7 @@ public:
         {
             stack_put.pop();
         }
-    };
+    }
     void display()
     {
         std::cout << "Queue: [ ";
@@ -133,7 +133,7 @@ public:
             reversed_put_stack.pop();
         }
         std::cout << "]" << std::endl;
-    };
+    }
 };
 
 #endif
