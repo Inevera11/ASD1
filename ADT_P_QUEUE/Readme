@@ -1,0 +1,15 @@
+WPROWADZENIE
+Kolejka priorytetowa to ADT zawierający elementy z kluczami(priorytetami), która pozwala na przeprowadzenie następujących operacji :
+
+-   konstruktor tworzący pustą kolejkę,
+-   testowanie, czy kolejka nie jest pusta[empty()],
+-   odczyt liczby elementów w kolejce[size()],
+-   wstawienie elementu do kolejki[push(item) lub put(item)],
+-   usuwanie elementu o największym(najmniejszym) priorytecie[pop()],
+-   dostęp do elementu o największym(najmniejszym) priorytecie[top()],
+-   czyszczenie kolejki[clear()].
+    Kolejki priorytetowe często używają wewnętrznie kopca.Wtedy tablicę zamienia się w kopiec w czasie O(n),
+    a wstawianie i usuwanie elementów zajmuje czas O(log n).Alternatywą są drzewa binarne samobalansujące się.
+
+ZADANIE 9.1
+Przygotować implementację realizującą ADT PRIORITY QUEUE na bazie std::vector i kopca z STL. Wydajność: wstawianie O(log n), usuwanie O(log n), odczyt największego O(1).
