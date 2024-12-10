@@ -1,0 +1,14 @@
+WPROWADZENIE
+Definicja rekurencyjna drzewa z korzeniem:
+
+-   Pusta struktura jest drzewem
+-   Jeżeli t_1, ..., t_k są rozłącznymi drzewami, to drzewem jest także struktura, w której korzeń r posiada jako swoje dzieci korzenie drzew t_1, ..., t_k, przy czym dodawana jest krawędź od korzenia r do dziecka tylko jeżeli dziecko jest niepuste.
+
+W teorii grafów definiuje się drzewo jako graf nieskierowany acykliczny, a korzeń to pewien wyróżniony wierzchołek. Wierzchołki bez dzieci to liście. W każdym drzewie istnieje dokładnie jedna ścieżka pomiędzy każdą parą wierzchołków. Zwykle rozważamy drzewa uporządkowane, gdzie kolejność dzieci jest ustalona. Poziom węzła to długość ścieżki do korzenia plus jeden. Poziom korzenia wynosi jeden.Wysokość niepustego drzewa to największy poziom węzła w drzewie.Wysokość pustego drzewa to z definicji zero.
+
+Drzewa o stopniu rozgałęzienia m można zaimplementować tak, że każdy węzeł ma m łączy dla dzieci, niektóre mogą być puste. Inne bardziej oszczędne podejście to implementacja na lewo syn, na prawo brat(ang.left child, right sibling, LCRS), która zasadniczo jest drzewem binarnym.
+
+W drzewie binarnym(uporządkowanym) każdy wierzchołek ma co najwyżej dwoje dzieci(lewe i prawe). Drzewo binarne zbalansowane to drzewo binarne, w którym dla każdego węzła wysokości lewego i prawego poddrzewa różnią się co najwyżej o jeden.
+
+ZADANIE 10.2
+Załóżmy, że drzewo binarne przechowuje liczby. Napisać funkcję calc_total(), która podaje sumę liczb przechowywanych w drzewie. Stworzyć dwie wersje: rekurencyjną i iteracyjną.
