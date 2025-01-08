@@ -82,7 +82,7 @@ public:
     void rotate_root_right() { rotate_right(root, nullptr); }
     void rotate_root_left() { rotate_left(root, nullptr); }
     void convert_to_list();
-    void rotate_every_second();
+    void rotate_every_second(BSTNode<T> *curr, BSTNode<T> *curr_parent, int counter);
     void display()
     {
         display(root, 0);
@@ -107,12 +107,12 @@ public:
 };
 
 template <typename T>
-void BinarySearchTree<T>::rotate_every_second()
+void BinarySearchTree<T>::rotate_every_second(BSTNode<T> *curr, BSTNode<T> *curr_parent, int counter)
 {
-    BSTNode<T> *curr = root;
-    BSTNode<T> *curr_parent = nullptr;
-    while (curr->right != nullptr)
+    int i = 0;
+    while (i < counter && curr->right != nullptr)
     {
+        i++;
         BSTNode<T> *tmp = curr->right;
         rotate_left(curr, curr_parent);
         curr_parent = tmp;
@@ -149,9 +149,12 @@ void BinarySearchTree<T>::convert_to_list()
 template <typename T>
 void BinarySearchTree<T>::dsw()
 {
+    BSTNode<T> *pseudo_root = new BSTNode<T>();
+    pseudo_root->right = root;
+    root = pseudo_root;
     convert_to_list();
     int node_count = 0;
-    for (BSTNode<T> *curr = root; curr != nullptr; curr = curr->right)
+    for (BSTNode<T> *curr = pseudo_root->right; curr != nullptr; curr = curr->right)
     {
         node_count++;
     }
@@ -162,13 +165,16 @@ void BinarySearchTree<T>::dsw()
     {
         m = m * 2 + 1; // dodajemy liczbę węzłów potrzebnych do kolejnego poziomu drzewa
     }
-    m = (m - 1) / 2; //  zmieniamy liczbę węzłow na wysokość
-
+    m = (m - 1) / 2; //  za dużo o jeden poziom
+    rotate_every_second(pseudo_root->right, pseudo_root, node_count - m);
     while (m > 1)
     {
         m /= 2;
-        rotate_every_second();
+        rotate_every_second(pseudo_root->right, pseudo_root, m);
     }
+    root = pseudo_root->right;
+    pseudo_root->right = nullptr;
+    delete pseudo_root;
 }
 
 template <typename T>
