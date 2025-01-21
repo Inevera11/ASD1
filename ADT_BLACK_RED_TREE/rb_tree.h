@@ -76,7 +76,7 @@ public:
     void insert_fixup(RBNode<T> *node);                      // naprawia kolory node
     RBNode<T> *search(RBNode<T> *node, const T &item) const; // zwraca węzeł
     void remove(RBNode<T> *node);
-    void delete_fixup(RBNode<T> *node);
+    void remove_fixup(RBNode<T> *node);
     RBNode<T> *minimum(RBNode<T> *node) const;
     void transplant(RBNode<T> *to_delete, RBNode<T> *sub_root); // Podstawia sub_root w miejsce to_delete.
     void display(RBNode<T> *node, int level);
@@ -232,11 +232,11 @@ void RedBlackBinarySearchTree<T>::remove(RBNode<T> *to_delete)
     return;
     delete to_delete;
     if (top_node_original_color)
-        delete_fixup(x); // fix up nodes coloring
+        remove_fixup(x); // fix up nodes coloring
 }
 
 template <typename T>
-void RedBlackBinarySearchTree<T>::delete_fixup(RBNode<T> *x)
+void RedBlackBinarySearchTree<T>::remove_fixup(RBNode<T> *x)
 {
     while (x != root && x->is_black)
     {

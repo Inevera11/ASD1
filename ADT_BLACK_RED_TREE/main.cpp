@@ -62,10 +62,23 @@ int main()
               << std::endl;
 
     // Test: Remove an element
+    tree.remove(33);
+    assert(tree.search(33) == nullptr);
+    std::cout << "Remove 33 from tree (no children)" << std::endl;
+    tree.display();
+    tree.remove(32);
+    assert(tree.search(32) == nullptr);
+    std::cout << "Remove 32 from tree (no right child)" << std::endl;
+    tree.display();
+    tree.remove(3);
+    tree.remove(4);
+    assert(tree.search(4) == nullptr);
+    std::cout << "Remove 3 then 4 from tree (4 has no left child)" << std::endl;
+    tree.display();
     tree.remove(20);
     assert(tree.search(20) == nullptr);
+    std::cout << "Remove root 20 from tree (has both children)" << std::endl;
     tree.display();
-    std::cout << "Removed root 20 from tree" << std::endl;
 
     // Test: Check tree is not empty after removals
     assert(!tree.empty());
