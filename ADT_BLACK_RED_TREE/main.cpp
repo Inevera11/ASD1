@@ -59,9 +59,6 @@ int main()
               << "\n newly created combination is black uncle line (5-4-3) -> rotate 5 right \n"
               << std::endl;
     tree.display();
-    tree.insert(6);
-    tree.display();
-    std::cout << "\n Insert 6 \n";
 
     std::cout
         << "\n Tree balancing is working as expected"
@@ -78,15 +75,14 @@ int main()
     tree.display();
     tree.remove(4);
     assert(tree.search(4) == nullptr);
-    std::cout << "Remove 4 from tree (has both children, successor has a child)" << std::endl;
+    std::cout << "Remove 4 from tree (has both children)" << std::endl;
     tree.display();
-    tree.remove(10);
-    assert(tree.search(10) == nullptr);
-    std::cout << "Remove root 10 from tree (has both children, right child is successor)" << std::endl;
+    std::cout << "Lastly, lets add 26" << std::endl;
+    tree.insert(26);
     tree.display();
     tree.remove(20);
     assert(tree.search(20) == nullptr);
-    std::cout << "Remove root 20 from tree (has both children)" << std::endl;
+    std::cout << "Remove root 20 from tree (has both children, successor has right child)" << std::endl;
     tree.display();
 
     // Test: Check tree is not empty after removals

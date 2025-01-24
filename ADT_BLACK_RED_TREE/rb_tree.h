@@ -239,7 +239,7 @@ void RedBlackBinarySearchTree<T>::remove(RBNode<T> *to_delete)
 template <typename T>
 void RedBlackBinarySearchTree<T>::remove_fixup(RBNode<T> *x)
 { // x ma dodatkowy czarny kolor
-    while (x != root && x->is_black)
+    while (x != root && x != nullptr && x->is_black)
     {
         if (x == x->parent->left)
         {
