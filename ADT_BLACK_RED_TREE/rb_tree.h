@@ -172,107 +172,109 @@ RBNode<T> *RedBlackBinarySearchTree<T>::minimum(RBNode<T> *node) const
 }
 
 template <typename T>
-void RedBlackBinarySearchTree<T>::transplant(RBNode<T> *to_delete, RBNode<T> *sub_root)
+void RedBlackBinarySearchTree<T>::transplant(RBNode<T> *to_delete, RBNode<T> *successor)
 {
-    // za uaktualnienie sub_root->left /  sub_root->right odpowiada funkcja wywołująca
+    // za uaktualnienie successor->left /  successor->right odpowiada funkcja wywołująca
     if (to_delete->parent == nullptr) // to_delete jest korzeniem
-        root = sub_root;
+        root = successor;
     else
     {
         if (to_delete == to_delete->parent->left) // to_delete jest lewym dzieckiem
-            to_delete->parent->left = sub_root;
+            to_delete->parent->left = successor;
         else // to_delete jest prawym dzieckiem
-            to_delete->parent->right = sub_root;
+            to_delete->parent->right = successor;
     }
-    if (sub_root != nullptr)
-        sub_root->parent = to_delete->parent;
+    if (successor != nullptr)
+        // ustaw poprwanie wskaźnik parenta w następniku
+        successor->parent = to_delete->parent;
 }
 
 template <typename T>
 void RedBlackBinarySearchTree<T>::remove(RBNode<T> *to_delete)
 {
-    RBNode<T> *top_node = to_delete;                   // Węzeł do usunięcia lub następny węzeł (jeśli to_delete ma dwa dzieci)
-    RBNode<T> *x;                                      // Wskaźnik na węzeł do naprawienia po usunięciu
-    bool top_node_original_color = top_node->is_black; // Zachowanie koloru węzła do usunięcia
-    if (to_delete->left == nullptr)                    // to_delete has no left child
+    RBNode<T> *top_node = to_delete;             // Początkowo węzeł to_delete jest "najwyższym" nodem w rozważanym poddrzewie
+    RBNode<T> *successor;                        // Wskaźnik na następnik najwyższego węzła
+    bool is_top_node_black = top_node->is_black; // Drzewo wymaga korekty jeśli usunięty węzeł jest czarny
+    if (to_delete->left == nullptr)              // to_delete nie ma lewego dziecka
     {
-        x = to_delete->right;
-        transplant(to_delete, to_delete->right); // prawe dziecko zajmie miejsce to_delete
+        successor = to_delete->right;
+        transplant(to_delete, to_delete->right); // Prawe dziecko zajmie miejsce to_delete
     }
-    else if (to_delete->right == nullptr) // to_delete has no right child
+    else if (to_delete->right == nullptr) // to_delete nie ma prawego dziecka
     {
-        x = to_delete->left;
-        transplant(to_delete, to_delete->left); // lewe dziecko zajmie miejsce to_delete
+        successor = to_delete->left;
+        transplant(to_delete, to_delete->left); // Lewe dziecko zajmie miejsce to_delete
     }
     else // to_delete posiada 2 dzieci
     {
-        top_node = minimum(to_delete->right);         // szukamy minimum w prawym poddrzewie to_delete
-        top_node_original_color = top_node->is_black; // Zachowujemy oryginalny kolor minimalnego węzła
-        x = top_node->right;
+        top_node = minimum(to_delete->right);   // Szukamy minimum w prawym poddrzewie to_delete (następnika)
+        is_top_node_black = top_node->is_black; // Drzewo wymaga korekty jeśli następnik jest czarny
+        successor = top_node->right;            // Aktualizujemy następnik najwyższego węzła
         if (top_node->parent == to_delete)
         {
-            // Jeśli top_node jest bezpośrednim prawym dzieckiem to_delete,
-            // to przypisujemy top_node jako rodzica dla x (prawego dziecka minimalnego węzła).
-            // Dzięki temu zachowujemy poprawne powiązania rodzic-dziecko w przypadku, gdy top_node nie ma prawa
-            // przekazać swojego dziecka (x) innemu rodzicowi.
-            x->parent = top_node;
+            // Jeśli top_node jest bezpośrednim prawym dzieckiem to_delete
+            // successor->parent = top_node;
+            ;
         }
         else
-        { // crate subtree with top_node as subroot
+        { // zastąp top_node jego prawym dzieckiem w drzewie
             transplant(top_node, top_node->right);
             top_node->right = to_delete->right;
             top_node->right->parent = top_node;
         }
-        // zastępujemy to_delete zbudowanym poddrzewem
+        // zastępujemy to_delete jego następnikiem
         transplant(to_delete, top_node);
         top_node->left = to_delete->left;
         top_node->left->parent = top_node;
         top_node->is_black = to_delete->is_black;
     }
-    return;
+    // izolujemy to_delete od drzewa żeby je bezpiecznie usunąć
+    to_delete->left = nullptr;
+    to_delete->right = nullptr;
     delete to_delete;
-    if (top_node_original_color)
-        remove_fixup(x); // fix up nodes coloring
+    if (is_top_node_black)
+        remove_fixup(successor); // korekta kolorow
 }
 
 template <typename T>
 void RedBlackBinarySearchTree<T>::remove_fixup(RBNode<T> *x)
-{
+{ // x ma dodatkowy czarny kolor
     while (x != root && x->is_black)
     {
         if (x == x->parent->left)
         {
             RBNode<T> *w = x->parent->right;
             if (!w->is_black)
-            {
+            { // Przypadek 1 - brat x jest czerwony
                 w->is_black = true;
                 x->parent->is_black = false;
                 rotate_left(x->parent);
                 w = x->parent->right;
             }
             if (w->left->is_black && w->right->is_black)
-            {
+            { // Przypadek 2 - brat x jest czany i  ma 2 czarnych dzieci
                 w->is_black = false;
                 x = x->parent;
             }
             else
             {
                 if (w->right->is_black)
-                {
+                { // przypadek 3 - tylko prawy syn brata x jest czarny
                     w->left->is_black = true;
                     w->is_black = false;
                     rotate_right(w);
                     w = x->parent->right;
                 }
+                // przpadek 4 - prawy syn brata x jest czerwony
                 w->is_black = x->parent->is_black;
                 x->parent->is_black = true;
                 w->right->is_black = true;
                 rotate_left(x->parent);
-                x = root;
+                x = root; // kończymy
             }
         }
         else
-        {
+        { // symetryczna sytuacja
             RBNode<T> *w = x->parent->left;
             if (!w->is_black)
             {
@@ -299,11 +301,12 @@ void RedBlackBinarySearchTree<T>::remove_fixup(RBNode<T> *x)
                 x->parent->is_black = true;
                 w->left->is_black = true;
                 rotate_right(x->parent);
-                x = root;
+                x = root; // kończymy
             }
         }
     }
-    x->is_black = true;
+    if (x != nullptr)
+        x->is_black = true; // root musi być czarny
 }
 
 template <typename T>

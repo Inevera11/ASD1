@@ -12,7 +12,9 @@ int main()
     std::cout << "Insert root 10" << std::endl;
     tree.display();
     tree.insert(20);
+    tree.display();
     tree.insert(5);
+    tree.display();
     tree.insert(15);
     tree.display();
 
@@ -39,13 +41,13 @@ int main()
     std::cout << "\n New node's (25) uncle would be red \n"
               << std::endl;
     tree.display();
-    tree.insert(31);
-    tree.insert(32);
-    std::cout << "\n Added 31, 32 \n"
+    tree.insert(35);
+    tree.insert(40);
+    std::cout << "\n Added 35, 40 \n"
               << std::endl;
     tree.display();
-    tree.insert(33);
-    std::cout << "\n New node's (33) uncle would be black (line) -> rotate 31 left, recolor 32 and 31 \n"
+    tree.insert(45);
+    std::cout << "\n New node's (45) uncle would be black (line) -> rotate 35 left, recolor 35 and 40 \n"
               << std::endl;
     tree.display();
     tree.insert(3);
@@ -57,23 +59,30 @@ int main()
               << "\n newly created combination is black uncle line (5-4-3) -> rotate 5 right \n"
               << std::endl;
     tree.display();
+    tree.insert(6);
+    tree.display();
+    std::cout << "\n Insert 6 \n";
 
-    std::cout << "\n Tree balancing is working as expected"
-              << std::endl;
+    std::cout
+        << "\n Tree balancing is working as expected"
+        << std::endl;
 
     // Test: Remove an element
-    tree.remove(33);
-    assert(tree.search(33) == nullptr);
-    std::cout << "Remove 33 from tree (no children)" << std::endl;
+    tree.remove(45);
+    assert(tree.search(45) == nullptr);
+    std::cout << "Remove 45 from tree (no children)" << std::endl;
     tree.display();
-    tree.remove(32);
-    assert(tree.search(32) == nullptr);
-    std::cout << "Remove 32 from tree (no right child)" << std::endl;
+    tree.remove(40);
+    assert(tree.search(40) == nullptr);
+    std::cout << "Remove 40 from tree (no right child)" << std::endl;
     tree.display();
-    tree.remove(3);
     tree.remove(4);
     assert(tree.search(4) == nullptr);
-    std::cout << "Remove 3 then 4 from tree (4 has no left child)" << std::endl;
+    std::cout << "Remove 4 from tree (has both children, successor has a child)" << std::endl;
+    tree.display();
+    tree.remove(10);
+    assert(tree.search(10) == nullptr);
+    std::cout << "Remove root 10 from tree (has both children, right child is successor)" << std::endl;
     tree.display();
     tree.remove(20);
     assert(tree.search(20) == nullptr);
