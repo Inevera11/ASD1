@@ -33,6 +33,8 @@ Podstawowe operacje na drzewach czerwono-czarnych obejmują:
 
 ## Operacja search
 
+Przeszukuje drzewo w celu odnalezienia węzła o konkretnej wartości. Zwraca wskaźnik na daną wartość lub nullptr.
+
 ## Operacja insert
 
 Zaczynamy od wstawienia nowego node ($Z$) pokolorowanego na czerwono w sposób standardowy dla drzewa binarnego. Następnie naprawiamy postałe niezgodności poprzez ponowne kolorowanie nodów i rotacje.
@@ -200,3 +202,7 @@ Przypadki 3 i 4 wymagają korekty drzewa, jeśli następnik był czarny (w przec
     na czarno. Ta transformacja przywraca strukturę
     drzewa czerwono-czarnego, zatem kończy
     operację usuwania węzła.
+
+## Podsumowanie
+
+Drzewa czerwono-czarne to efektywna struktura danych, zapewniająca samobalansowanie i gwarantująca optymalne czasy działania operacji wyszukiwania, wstawiania i usuwania. Dzięki zachowaniu kluczowych właściwości kolorystycznych oraz rotacjom umożliwiają utrzymanie wysokości drzewa na poziomie logarytmicznym względem liczby węzłów. Ich szerokie zastosowanie obejmuje systemy plików, bazy danych oraz inne systemy wymagające szybkiego dostępu do danych i częstych modyfikacji.
